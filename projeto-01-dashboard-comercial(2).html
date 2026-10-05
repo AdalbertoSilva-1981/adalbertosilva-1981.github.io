@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Projeto 01 — Dashboard Comercial | Adalberto Silva</title>
+<style>
+:root{--navy:#0b1f3a;--blue:#1557a6;--muted:#657085;--line:#e6ebf2;--bg:#f7f9fc}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Segoe UI,Arial,sans-serif;color:#172033;background:var(--bg);line-height:1.6}
+.container{width:min(1120px,92%);margin:auto}.nav{position:sticky;top:0;z-index:5;background:#fffffff2;border-bottom:1px solid var(--line)}
+.navin{height:68px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:800;color:var(--navy);letter-spacing:.04em;text-decoration:none}.links{display:flex;gap:22px;font-size:.92rem}.links a{color:var(--muted);text-decoration:none;transition:color .2s ease}.links a:hover,.links a:focus-visible{color:var(--blue)}
+.hero{padding:88px 0 65px;background:linear-gradient(180deg,#fff,#f7f9fc)}.ey{color:var(--blue);font-size:.78rem;font-weight:800;letter-spacing:.12em}
+h1{font-size:clamp(2.7rem,6vw,4.8rem);line-height:1.02;letter-spacing:-.05em;color:var(--navy);margin:14px 0}
+.hero p,.lead{max-width:760px;color:var(--muted);font-size:1.08rem}.btn{display:inline-block;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700;border:1px solid var(--line);margin:18px 8px 0 0}.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+section{padding:68px 0}.kicker{color:var(--blue);font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}h2{color:var(--navy);font-size:2rem;margin:7px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:25px}.card,.metric{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}.card h3{color:var(--navy);margin-top:0}.card p{color:var(--muted)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}.metric small{color:var(--muted)}.value{font-size:1.7rem;font-weight:850;color:var(--blue)}
+.visual{background:#fff;border:1px solid var(--line);border-radius:18px;padding:10px;margin-top:25px}.visual img{width:100%;display:block;border-radius:10px}
+.insights{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:25px}.insight{background:#fff;border:1px solid var(--line);border-left:4px solid #1687e8;border-radius:12px;padding:19px}.tags{display:flex;flex-wrap:wrap;gap:9px}.tag{background:#edf3fb;color:var(--navy);padding:8px 11px;border-radius:8px;font-weight:700;font-size:.85rem}
+footer{padding:30px 0;color:var(--muted)}@media(max-width:800px){.links{display:none}.grid,.metrics,.insights{grid-template-columns:1fr 1fr}}@media(max-width:560px){.grid,.metrics,.insights{grid-template-columns:1fr}section{padding:50px 0}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="container navin"><a class="brand" href="../index.html">ADALBERTO SILVA</a><div class="links"><a href="../index.html">← Início</a><a href="#processo">Processo</a><a href="#dashboard">Dashboard</a><a href="#insights">Insights</a><a href="#stack">Tecnologias</a></div></div></nav>
+
+<header class="hero"><div class="container">
+<div class="ey">PROJETO 01 · DATA ANALYTICS</div>
+<h1>Dashboard<br>Comercial</h1>
+<p>Uma solução analítica desenvolvida para transformar dados de vendas em indicadores, análises interativas e insights de negócio usando Power BI, Excel, Power Query e DAX.</p>
+<a class="btn primary" href="#dashboard">Ver dashboard</a><a class="btn" href="#insights">Ver insights</a>
+</div></header>
+
+<section><div class="container"><div class="kicker">O desafio</div><h2>De dados brutos a uma visão comercial clara</h2>
+<p class="lead">A proposta foi estruturar uma base comercial e criar uma solução para acompanhar faturamento, volume de vendas, ticket médio e desempenho por período, estado, categoria e produto.</p>
+<div class="grid"><div class="card"><h3>Problema</h3><p>Consolidar informações comerciais em uma visão única e fácil de explorar.</p></div><div class="card"><h3>Objetivo</h3><p>Disponibilizar indicadores e análises interativas para apoiar a leitura do desempenho.</p></div><div class="card"><h3>Solução</h3><p>Dashboard em Power BI com medidas DAX, filtros e uma página dedicada a insights.</p></div></div></div></section>
+
+<section id="processo"><div class="container"><div class="kicker">Metodologia</div><h2>Como o projeto foi construído</h2>
+<div class="grid"><div class="card"><h3>01 · Dados</h3><p>Base comercial com 200 registros de vendas e dimensões de cliente, estado, categoria e produto.</p></div><div class="card"><h3>02 · Tratamento</h3><p>Preparação e organização dos dados com Excel e Power Query.</p></div><div class="card"><h3>03 · DAX</h3><p>Medidas para faturamento, vendas, quantidade, ticket médio e participação.</p></div></div></div></section>
+
+<section><div class="container"><div class="kicker">Indicadores</div><h2>Visão geral da base</h2><div class="metrics">
+<div class="metric"><small>Faturamento total</small><div class="value">R$ 1,68 mi</div></div>
+<div class="metric"><small>Número de vendas</small><div class="value">200</div></div>
+<div class="metric"><small>Quantidade vendida</small><div class="value">1.161</div></div>
+<div class="metric"><small>Ticket médio</small><div class="value">R$ 8.412,65</div></div>
+</div></div></section>
+
+<section id="dashboard"><div class="container"><div class="kicker">Dashboard</div><h2>Análise de Vendas e Desempenho</h2>
+<p class="lead">A primeira página permite explorar os dados por Estado, Categoria, Produto e Período. Os indicadores e gráficos são recalculados dinamicamente pelos filtros.</p>
+<div class="visual"><img src="dashboard-comercial.png" alt="Dashboard Comercial em Power BI"></div></div></section>
+
+<section id="insights"><div class="container"><div class="kicker">Insights</div><h2>Principais descobertas</h2>
+<div class="insights">
+<div class="insight"><strong>Concentração por estado</strong><br>A Bahia representa <strong>23,4%</strong> do faturamento total.</div>
+<div class="insight"><strong>Distribuição por categoria</strong><br>Alimentos representa <strong>22,5%</strong>, seguida por Vestuário, com <strong>21,6%</strong>.</div>
+<div class="insight"><strong>Concentração por produto</strong><br>Os 10 produtos destacados concentram aproximadamente <strong>39,8%</strong> do faturamento.</div>
+<div class="insight"><strong>Oscilação mensal</strong><br>O faturamento variou de <strong>R$ 60,8 mil em junho</strong> para <strong>R$ 315,8 mil em fevereiro</strong>, diferença relativa de <strong>419,85%</strong>.</div>
+</div>
+<div class="visual"><img src="insights-comerciais.png" alt="Página de Insights Comerciais"></div></div></section>
+
+<section id="stack"><div class="container"><div class="kicker">Stack</div><h2>Tecnologias utilizadas</h2><div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Power Query</span><span class="tag">Excel</span><span class="tag">Data Visualization</span><span class="tag">Análise de Dados</span></div></div></section>
+
+<footer><div class="container">© 2026 Adalberto Silva · Portfólio de Dados e TI</div></footer>
+</body></html>
