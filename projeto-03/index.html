@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Projeto de controle operacional de equipamentos desenvolvido com Excel e Power Query por Adalberto Silva.">
+  <title>Projeto 03 | Controle Operacional — Adalberto Silva</title>
+
+  <style>
+    :root {
+      --navy: #0b1f3a;
+      --blue: #155da7;
+      --cyan: #1687e8;
+      --bg: #f3f7fc;
+      --white: #ffffff;
+      --text: #24364b;
+      --muted: #61748b;
+      --line: #dce6f2;
+      --soft: #e7f1ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding: 15px 0;
+    }
+
+    .brand {
+      color: var(--navy);
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .nav-link {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: 78px 0 58px;
+      background:
+        radial-gradient(circle at 90% 10%, #dbeaff 0, transparent 32%),
+        linear-gradient(135deg, #ffffff, #eef5ff);
+    }
+
+    .eyebrow {
+      color: var(--blue);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 14px 0 18px;
+      color: var(--navy);
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      line-height: 1.06;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.12rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 19px;
+      border-radius: 10px;
+      font-weight: 750;
+      border: 1px solid var(--line);
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--blue);
+    }
+
+    main {
+      padding: 54px 0 72px;
+    }
+
+    section {
+      margin-bottom: 54px;
+      scroll-margin-top: 24px;
+    }
+
+    .section-heading {
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      margin: 7px 0;
+      color: var(--navy);
+      font-size: clamp(1.65rem, 3vw, 2.15rem);
+      line-height: 1.2;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 790px;
+      margin-bottom: 0;
+    }
+
+    .card {
+      padding: 23px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .kpi {
+      padding: 20px 16px;
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 14px;
+    }
+
+    .kpi-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.87rem;
+      font-weight: 650;
+    }
+
+    .kpi-value {
+      display: block;
+      margin-top: 8px;
+      color: var(--blue);
+      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      font-weight: 850;
+      line-height: 1.2;
+    }
+
+    .kpi-note {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .dashboard-frame {
+      padding: 12px;
+      overflow: hidden;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 12px 34px rgba(11, 31, 58, 0.06);
+    }
+
+    .dashboard-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 9px;
+    }
+
+    .image-caption {
+      margin: 12px 4px 2px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .insights {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .insight {
+      padding: 22px;
+      background: white;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--cyan);
+      border-radius: 13px;
+    }
+
+    .insight h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .insight p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .process-item {
+      padding: 20px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    .process-number {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 12px;
+      color: white;
+      background: var(--blue);
+      border-radius: 9px;
+      font-weight: 800;
+    }
+
+    .process-item h3 {
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+
+    .process-item p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .cost-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .cost-table th,
+    .cost-table td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .cost-table th {
+      color: white;
+      background: var(--navy);
+    }
+
+    .cost-table td:last-child,
+    .cost-table th:last-child {
+      text-align: right;
+    }
+
+    .cost-table tr:last-child td {
+      border-bottom: 0;
+      font-weight: 800;
+    }
+
+    .note {
+      margin-top: 16px;
+      padding: 15px 18px;
+      border-radius: 10px;
+      background: var(--soft);
+      color: var(--navy);
+      font-size: 0.9rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 8px 13px;
+      color: var(--blue);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    .closing {
+      padding: 36px;
+      color: white;
+      background: var(--navy);
+      border-radius: 20px;
+    }
+
+    .closing h2 {
+      margin-bottom: 10px;
+    }
+
+    .closing p {
+      color: #d6e5f8;
+      max-width: 720px;
+    }
+
+    .closing .btn {
+      background: white;
+      color: var(--navy);
+      border-color: white;
+    }
+
+    footer {
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .kpis {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 52px 0 42px;
+      }
+
+      h1 {
+        letter-spacing: -1px;
+      }
+
+      .kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .insights,
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .card,
+      .closing {
+        padding: 19px;
+      }
+
+      .dashboard-frame {
+        padding: 6px;
+      }
+
+      .cost-table th,
+      .cost-table td {
+        padding: 10px;
+        font-size: 0.87rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container nav" aria-label="Navegação principal">
+      <a class="brand" href="https://adalbertosilva-1981.github.io/">
+        ADALBERTO SILVA
+      </a>
+      <a class="nav-link" href="https://adalbertosilva-1981.github.io/">
+        ← Voltar ao portfólio
+      </a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="container">
+      <span class="eyebrow">Projeto 03 · Análise Operacional</span>
+      <h1>Controle Operacional de Equipamentos</h1>
+      <p>
+        Uma solução desenvolvida com Excel e Power Query para organizar
+        informações de equipamentos, acompanhar situações de manutenção,
+        classificar prioridades e analisar custos por unidade.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#dashboard">Ver dashboard</a>
+        <a class="btn btn-secondary" href="#metodologia">Conhecer o processo</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section aria-labelledby="visao-geral">
+      <div class="section-heading">
+        <span class="eyebrow">Visão geral</span>
+        <h2 id="visao-geral">Indicadores do projeto</h2>
+        <p>
+          A base tratada contém 300 equipamentos e permite analisar status,
+          prioridade operacional, tempo desde a última manutenção e custos
+          registrados.
+        </p>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi">
+          <span class="kpi-label">Total de equipamentos</span>
+          <span class="kpi-value">300</span>
+          <span class="kpi-note">Registros analisados</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Equipamentos ativos</span>
+          <span class="kpi-value">174</span>
+          <span class="kpi-note">58% da base</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Em manutenção</span>
+          <span class="kpi-value">53</span>
+          <span class="kpi-note">17,7% da base</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Disponíveis</span>
+          <span class="kpi-value">37</span>
+          <span class="kpi-note">12,3% da base</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Inativos</span>
+          <span class="kpi-value">36</span>
+          <span class="kpi-note">12% da base</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard" aria-labelledby="dashboard-title">
+      <div class="section-heading">
+        <span class="eyebrow">Visualização</span>
+        <h2 id="dashboard-title">Dashboard Operacional</h2>
+        <p>
+          Painel desenvolvido no Excel com indicadores, gráficos de distribuição
+          e cartões de insights para apoiar a leitura gerencial dos dados.
+        </p>
+      </div>
+
+      <div class="dashboard-frame">
+        <img
+          src="dashboard-operacional.png"
+          alt="Dashboard Operacional de Controle de Equipamentos com indicadores de status, prioridade, faixas de manutenção, custos por unidade e insights."
+          loading="lazy"
+        >
+      </div>
+      <p class="image-caption">
+        Prévia estática do dashboard desenvolvido no Excel.
+      </p>
+    </section>
+
+    <section aria-labelledby="insights-title">
+      <div class="section-heading">
+        <span class="eyebrow">Resultados</span>
+        <h2 id="insights-title">Principais insights</h2>
+        <p>
+          Os indicadores ajudam a localizar pontos que merecem investigação
+          e acompanhamento operacional.
+        </p>
+      </div>
+
+      <div class="insights">
+        <article class="insight">
+          <h3>Acompanhamento de manutenção</h3>
+          <p>
+            144 equipamentos (48% da base) estão há mais de 180 dias desde
+            a última manutenção registrada. A necessidade de intervenção
+            deve ser verificada conforme a política de cada equipamento.
+          </p>
+        </article>
+
+        <article class="insight">
+          <h3>Prioridade operacional</h3>
+          <p>
+            195 equipamentos (65%) foram classificados como críticos ou de
+            alta prioridade pelas regras definidas no tratamento dos dados.
+          </p>
+        </article>
+
+        <article class="insight">
+          <h3>Custos por unidade</h3>
+          <p>
+            A Unidade D apresenta o maior custo registrado, de R$ 25.627,77.
+            A Unidade C apresenta o menor, de R$ 16.032,98. A comparação
+            não representa, isoladamente, uma medida de eficiência.
+          </p>
+        </article>
+
+        <article class="insight">
+          <h3>Qualidade dos dados</h3>
+          <p>
+            Três equipamentos não possuem custo de manutenção informado.
+            Esses valores foram preservados como ausentes, e não tratados
+            automaticamente como custos iguais a zero.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="custos-title">
+      <div class="section-heading">
+        <span class="eyebrow">Análise financeira</span>
+        <h2 id="custos-title">Custos registrados por unidade</h2>
+        <p>Valores disponíveis na base após o tratamento dos dados.</p>
+      </div>
+
+      <div class="card" style="padding: 0; overflow-x: auto;">
+        <table class="cost-table">
+          <thead>
+            <tr>
+              <th>Unidade</th>
+              <th>Custo registrado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Unidade D</td><td>R$ 25.627,77</td></tr>
+            <tr><td>Unidade B</td><td>R$ 22.317,14</td></tr>
+            <tr><td>Unidade A</td><td>R$ 21.359,01</td></tr>
+            <tr><td>Unidade E</td><td>R$ 18.333,82</td></tr>
+            <tr><td>Unidade C</td><td>R$ 16.032,98</td></tr>
+            <tr><td>Total registrado</td><td>R$ 103.670,72</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <strong>Nota de qualidade:</strong> o total corresponde aos custos
+        informados na base. Como existem três equipamentos sem custo registrado,
+        o valor não deve ser interpretado como o custo completo de todos os
+        equipamentos.
+      </div>
+    </section>
+
+    <section id="metodologia" aria-labelledby="metodologia-title">
+      <div class="section-heading">
+        <span class="eyebrow">Como foi construído</span>
+        <h2 id="metodologia-title">Metodologia aplicada</h2>
+        <p>
+          O projeto foi estruturado em etapas para garantir consistência
+          dos dados antes da construção dos indicadores.
+        </p>
+      </div>
+
+      <div class="process">
+        <article class="process-item">
+          <span class="process-number">01</span>
+          <h3>Preparação da base</h3>
+          <p>
+            Organização dos registros de equipamentos, unidades, status,
+            responsáveis, datas e custos.
+          </p>
+        </article>
+
+        <article class="process-item">
+          <span class="process-number">02</span>
+          <h3>Tratamento com Power Query</h3>
+          <p>
+            Padronização de textos, definição de tipos de dados e criação
+            de colunas auxiliares para análise.
+          </p>
+        </article>
+
+        <article class="process-item">
+          <span class="process-number">03</span>
+          <h3>Regras e indicadores</h3>
+          <p>
+            Cálculo de dias desde a última manutenção, faixas de tempo,
+            situação da manutenção e prioridade operacional.
+          </p>
+        </article>
+
+        <article class="process-item">
+          <span class="process-number">04</span>
+          <h3>Visualização e análise</h3>
+          <p>
+            Construção de cartões de indicadores, gráficos por status,
+            prioridade, faixa de manutenção e custos por unidade.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="tecnologias-title">
+      <div class="section-heading">
+        <span class="eyebrow">Ferramentas</span>
+        <h2 id="tecnologias-title">Tecnologias utilizadas</h2>
+      </div>
+      <div class="tags">
+        <span class="tag">Microsoft Excel</span>
+        <span class="tag">Power Query</span>
+        <span class="tag">Fórmulas e funções</span>
+        <span class="tag">Indicadores operacionais</span>
+        <span class="tag">Visualização de dados</span>
+        <span class="tag">Qualidade dos dados</span>
+      </div>
+    </section>
+
+    <section class="closing">
+      <h2>Dados organizados. Decisões mais claras.</h2>
+      <p>
+        Este projeto demonstra minha prática em tratamento de dados,
+        construção de indicadores e comunicação de resultados operacionais.
+        Estou em formação na área de Tecnologia da Informação e busco
+        oportunidades para continuar desenvolvendo essas competências.
+      </p>
+      <a class="btn" href="https://adalbertosilva-1981.github.io/">
+        ← Voltar ao portfólio principal
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>Adalberto Silva · Portfólio de Dados e TI</span>
+      <span>Projeto 03 · Controle Operacional</span>
+    </div>
+  </footer>
+</body>
+</html>
